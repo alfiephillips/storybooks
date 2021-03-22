@@ -18,4 +18,20 @@ router.get(
   }
 );
 
+// @desc Logout with Google Authentication
+// @route /auth/logout
+
+router.get("/logout", (req, res) => {
+  if (req.user) {
+    console.log(
+      `Logout request from id: ${req.user.id} name: ${req.user.displayName}`
+    );
+    req.logout();
+    res.redirect("/");
+  } else {
+    console.log(`Failed Logout request`);
+    res.redirect("/");
+  }
+});
+
 module.exports = router;

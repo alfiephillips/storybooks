@@ -1,1 +1,28 @@
+html {
+  margin: 0;
+  padding: 0;
+}
 
+p {
+  margin: 10px 0 !important;
+}
+
+.login-container {
+  width: 400px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.copyright {
+  margin-top: 225px;
+  padding: 10px;
+  text-align: center;
+  align-items: center;
+  background-color: #fff;
+  display: block;
+}
+
+.copy-text {
+  font-size: 1.5rem;
+  font-family: "Segoue UI";
+}
