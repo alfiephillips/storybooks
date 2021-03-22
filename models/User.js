@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+// Create User Table
+
 const UserSchema = new mongoose.Schema({
   googleId: {
     type: String,
