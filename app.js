@@ -51,7 +51,7 @@ app.set("view engine", ".hbs");
 app.use(
   csrfProtection,
   session({
-    secret: "keyboard cat",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
