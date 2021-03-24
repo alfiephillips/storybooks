@@ -11,6 +11,8 @@ const MongoStore = require("connect-mongo")(session);
 const connectDB = require("./config/db");
 const chalk = require("chalk");
 const clear = require("clear-console");
+const csrf = require("csurf");
+const cookieParser = require("cookie-parser");
 
 // Load config
 
@@ -32,10 +34,14 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+// Parse Cookies
+
+let csrfProtection = csrf({ cookie: true });
+
 // Body Parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
+app.use(cookieParser());
 // Handlebars
 
 app.engine(".hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
@@ -43,6 +49,7 @@ app.set("view engine", ".hbs");
 
 // Sessions
 app.use(
+  csrfProtection,
   session({
     secret: "keyboard cat",
     resave: false,
