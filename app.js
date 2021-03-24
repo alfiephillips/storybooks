@@ -30,6 +30,10 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+// Body Parser
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 // Handlebars
 
 app.engine(".hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
@@ -57,13 +61,21 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes
 app.use("/", require("./routes/index"));
 app.use("/auth", require("./routes/auth"));
+app.use("/stories", require("./routes/stories"));
 
 const PORT = process.env.PORT || 5000;
-
+const HOST = process.env.HOST;
 // Listen for requests
 
-app.listen(PORT, (HOST) => {
-  console.log(
-    `Server starting on ${process.env.NODE_ENV} mode on port ${PORT}`
-  );
+const startup = () => {
+  console.log(`PORT: ${PORT}`);
+  console.log(`MODE: ${process.env.NODE_ENV}`);
+  console.log(`URL: ${HOST}:${PORT}`);
+};
+
+app.listen(PORT, () => {
+  console.log(`SERVER IS STARTING...`);
+  setTimeout(() => {
+    startup();
+  }, 2000);
 });
