@@ -9,6 +9,8 @@ const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const connectDB = require("./config/db");
+const chalk = require("chalk");
+const clear = require("clear-console");
 
 // Load config
 
@@ -68,13 +70,14 @@ const HOST = process.env.HOST;
 // Listen for requests
 
 const startup = () => {
-  console.log(`PORT: ${PORT}`);
-  console.log(`MODE: ${process.env.NODE_ENV}`);
-  console.log(`URL: ${HOST}:${PORT}`);
+  console.log(chalk.cyan.bgBlack.underline(`\nPORT: ${PORT}\n`));
+  console.log(chalk.red.bgBlack.underline(`MODE: ${process.env.NODE_ENV}\n`));
+  console.log(chalk.yellow.bgBlack.underline(`URL: ${HOST}:${PORT}\n`));
 };
 
 app.listen(PORT, () => {
-  console.log(`SERVER IS STARTING...`);
+  clear(true);
+  console.log(chalk.black.bgWhite.bold("SERVER IS STARTING...\n"));
   setTimeout(() => {
     startup();
   }, 2000);
