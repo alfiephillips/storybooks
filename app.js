@@ -45,7 +45,8 @@ app.use(cookieParser());
 const { 
   formatDate,
   stripTags,
-  truncate
+  truncate,
+  editIcon
 } = require('./helpers/hbs');
 
 // Handlebars
@@ -53,7 +54,8 @@ const {
 app.engine(".hbs", exphbs({ helpers: {
   formatDate,
   stripTags,
-  truncate
+  truncate,
+  editIcon
 }, defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", ".hbs");
 
@@ -77,6 +79,13 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Set global variables
+
+app.use(function(req, res, next) {
+  res.locals.user = req.user || null;
+  next()
+})
 
 // Static Folder
 

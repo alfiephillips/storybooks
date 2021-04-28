@@ -14,15 +14,22 @@ p {
 }
 
 .copyright {
-  margin-top: 225px;
+  margin-top: 368px !important;
   padding: 10px;
   text-align: center;
   align-items: center;
-  background-color: #fff;
+  background-color: rgb(241, 237, 237);
   display: block;
 }
 
 .copy-text {
   font-size: 1.5rem;
   font-family: "Segoue UI";
+}
+
+.fa-small {
+  font-size: 20px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: red;
 }
