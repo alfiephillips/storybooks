@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-// Create User Table
+// Create User Tables
 
-const UserSchema = new mongoose.Schema({
+const GoogleUserSchema = new mongoose.Schema({
   googleId: {
     type: String,
     required: true,
@@ -33,4 +33,4 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("GoogleUser", GoogleUserSchema)

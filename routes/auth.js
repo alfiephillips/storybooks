@@ -6,12 +6,25 @@ const passport = require("passport");
 
 router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
 
+// @desc Authenticate with Github
+// @route GET /auth/github
+
+router.get("/github", passport.authenticate(`github`));
+
 // @desc Callback for Google Authentication
 // @route GET /auth/google/callback
 
 router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    res.redirect("/dashboard");
+  }
+);
+
+router.get(
+  "/github/callback",
+  passport.authenticate("github", { failureRedirect: "/" }),
   (req, res) => {
     res.redirect("/dashboard");
   }

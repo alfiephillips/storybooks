@@ -17,7 +17,7 @@ const cookieSession = require('cookie-session');
 
 // Load config
 
-dotenv.config({ path: "./config/config.env" });
+dotenv.config({ path: "config.env" });
 
 // Passport config
 
