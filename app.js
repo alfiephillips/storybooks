@@ -13,6 +13,7 @@ const chalk = require("chalk");
 const clear = require("clear-console");
 const csrf = require("csurf");
 const cookieParser = require("cookie-parser");
+const cookieSession = require('cookie-session');
 
 // Load config
 
@@ -34,24 +35,26 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-// Parse Cookies
-
-let csrfProtection = csrf({ cookie: true });
 
 // Body Parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser(process.env.SECRET));
+app.use(cookieParser());
 // Handlebars
 
 app.engine(".hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", ".hbs");
 
 // Sessions
+
 app.use(
-  csrfProtection,
-  session({
+  cookieSession({
+    name: 'session',
     secret: process.env.SECRET,
+    maxAge: 24 * 60 * 60 * 1000,
+    sameSite: 'lax',
+    path: '/',
+    httpOnly: true,
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),

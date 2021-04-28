@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+const date = require('date-and-time');
+const now = new Date();
+const pattern = date.compile('ddd, MMM DD YYYY');
+const story_creation_date = date.format(now, pattern); 
 
 // Create Story Table
 
@@ -24,7 +28,7 @@ const StorySchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: story_creation_date
   },
 });
 
