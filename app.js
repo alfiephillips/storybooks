@@ -41,7 +41,7 @@ let csrfProtection = csrf({ cookie: true });
 // Body Parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser(process.env.SECRET));
 // Handlebars
 
 app.engine(".hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));

@@ -4,6 +4,13 @@ const { ensureAuth } = require("../middleware/auth");
 
 const Story = require("../models/Story");
 
+// @desc Show public stories
+// @route GET /stories
+
+router.get("/", ensureAuth, (req, res) => {
+  res.render("/stories");
+});
+
 // @desc Show the add page
 // @route GET /stories/add
 
