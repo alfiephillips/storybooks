@@ -38,7 +38,23 @@ router.get('/', ensureAuth, async (req, res) => {
     console.error(err)
     res.render('error/500')
   }
-})
+});
+
+// @desc Show individual story
+// @route GET /stories/:id
+
+router.get('/:id', ensureAuth, async (req, res) => {
+  try {
+    const story = await Story.findOne({storyId: req.params.id}).lean();
+    
+    res.render(`stories/index/${req.params.id}`, {
+      story
+    })
+  } catch (err) {
+    console.log(err);
+    res.render('error/404');
+  }
+});
 
 
 module.exports = router;
